@@ -34,20 +34,26 @@ module Lita
           raise "Redmine type must be :redmine (default) or :chiliproject ('config.handlers.redmine.type')"
         end
 
-        issue_url = "#{redmine_url}/issues/#{response.matches.flatten.first}"
+        issue_id = response.matches.flatten.first
+        issue_url = "#{redmine_url}/issues/#{issue_id}"
+        issue_json_url = "#{issue_url}.json"
 
         http_resp = http.get do |req|
-          req.url "#{issue_url}.json"
+          req.url issue_json_url
           req.headers[apikey_header] = apikey
         end
 
-        unless http_resp.status == 200
-          raise "Failed to fetch #{issue_url} (#{http_resp.status})"
+        case http_resp.status
+        when 200
+          resp = MultiJson.load(http_resp.body)
+          message = "#{issue_url} : #{resp["issue"]["subject"]}"
+        when 404
+          message = "Issue ##{issue_id} does not exist"
+        else
+          raise "Failed to fetch #{issue_json_url} (#{http_resp.status})"
         end
 
-        resp = MultiJson.load(http_resp.body)
-
-        response.reply("#{issue_url} : #{resp["issue"]["subject"]}")
+        response.reply(message)
       rescue Exception => e
         response.reply("Error: #{e.message}")
       end
