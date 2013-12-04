@@ -10,7 +10,7 @@ module Lita
         config.apikey = nil
       end
 
-      route /^redmine\s+(\d+)/, :redmine, help: { "redmine <issue #>" => "Displays issue url and subject" }
+      route /redmine\s+(\d+)/, :redmine, help: { "redmine <issue #>" => "Displays issue url and subject" }
 
       def redmine(response)
         if Lita.config.handlers.redmine.url
@@ -34,7 +34,7 @@ module Lita
           raise "Redmine type must be :redmine (default) or :chiliproject ('config.handlers.redmine.type')"
         end
 
-        issue_url = "#{redmine_url}/issues/#{response.args[0]}"
+        issue_url = "#{redmine_url}/issues/#{response.matches.flatten.first}"
 
         http_resp = http.get do |req|
           req.url "#{issue_url}.json"
