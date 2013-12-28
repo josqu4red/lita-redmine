@@ -3,7 +3,7 @@ Gem::Specification.new do |spec|
   spec.version       = "0.0.1"
   spec.authors       = ["Jonathan Amiez"]
   spec.email         = ["jonathan.amiez@gmail.com"]
-  spec.description   = "Fetch various information from your Redmine instance"
+  spec.description   = "Redmine interaction through Lita"
   spec.summary       = "Fetch various information from your Redmine instance"
   spec.homepage      = "https://github.com/josqu4red/lita-redmine"
   spec.license       = "MIT"
@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "lita", "~> 2.6"
+  spec.add_runtime_dependency "lita", "~> 2.7"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
