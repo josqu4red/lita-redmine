@@ -10,9 +10,9 @@ module Lita
         config.apikey = nil
       end
 
-      route /redmine\s+(\d+)/, :redmine, help: { "redmine <issue #>" => "Displays issue url and subject" }
+      route /redmine\s+(\d+)/, :issue, help: { "redmine <issue #>" => "Displays issue url and subject" }
 
-      def redmine(response)
+      def issue(response)
         if Lita.config.handlers.redmine.url
           redmine_url = Lita.config.handlers.redmine.url.chomp("/")
         else
