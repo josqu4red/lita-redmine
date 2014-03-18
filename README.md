@@ -1,6 +1,6 @@
 # lita-redmine
 
-TODO: Add a description of the plugin.
+**lita-gerrit** is a handler for [Lita](https://github.com/jimmycuadra/lita) that allows interaction with Redmine project management tool (or its fork, Chiliproject).
 
 ## Installation
 
@@ -12,12 +12,25 @@ gem "lita-redmine"
 
 ## Configuration
 
-TODO: Describe any configuration attributes the plugin exposes.
+* `url` (String) - Redmine service URL
+* `type` (Symbol) - Redmine variant used (`:redmine` or `:chiliproject`)
+* `apikey` (String) - Key for REST API access
 
+### Example
+
+```ruby
+Lita.configure do |config|
+  config.handlers.redmine.url = "https://redmine.example.com"
+  config.handlers.redmine.type = :redmine
+  config.handlers.redmine.apikey = "0000000000000000000000000000000000000000"
+end
+```
 ## Usage
 
-TODO: Describe the plugin's features and how to use them.
-
+```
+lita > redmine 42
+https://redmine.fotolia.com/issues/21206 : Chef-ize powerdns instalation
+```
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
