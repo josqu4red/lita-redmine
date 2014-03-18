@@ -29,7 +29,7 @@ end
 
 ```
 lita > redmine 42
-https://redmine.fotolia.com/issues/21206 : Chef-ize powerdns instalation
+https://redmine.example.com/issues/21206 : Chef-ize powerdns instalation
 ```
 ## License
 
