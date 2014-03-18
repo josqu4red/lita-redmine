@@ -35,13 +35,10 @@ module Lita
         end
 
         issue_id = response.matches.flatten.first
-        issue_url = "#{redmine_url}/issues/#{issue_id}"
+        issue_url = URI.parse("#{redmine_url}/issues/#{issue_id}")
         issue_json_url = "#{issue_url}.json"
 
-        http_resp = http.get do |req|
-          req.url issue_json_url
-          req.headers[apikey_header] = apikey
-        end
+        http_resp = http.get(issue_json_url, {}, { apikey_header => apikey })
 
         case http_resp.status
         when 200

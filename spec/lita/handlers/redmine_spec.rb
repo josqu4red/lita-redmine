@@ -20,6 +20,35 @@ describe Lita::Handlers::Redmine, lita_handler: true do
       response
     end
 
+    describe "params" do
+      it "replies with error if URL is not defined" do
+        Lita.configure do |config|
+          config.handlers.redmine.url = nil
+        end
+
+        send_command("redmine 42")
+        expect(replies.last).to eq("Error: Redmine URL must be defined ('config.handlers.redmine.url')")
+      end
+
+      it "replies with error if API key is not defined" do
+        Lita.configure do |config|
+          config.handlers.redmine.apikey = nil
+        end
+
+        send_command("redmine 42")
+        expect(replies.last).to eq("Error: Redmine API key must be defined ('config.handlers.redmine.apikey')")
+      end
+
+      it "replies with error if Type is not defined" do
+        Lita.configure do |config|
+          config.handlers.redmine.type = nil
+        end
+
+        send_command("redmine 42")
+        expect(replies.last).to eq("Error: Redmine type must be :redmine (default) or :chiliproject ('config.handlers.redmine.type')")
+      end
+    end
+
     before do
       allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(response)
     end
