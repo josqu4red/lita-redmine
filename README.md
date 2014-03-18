@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/josqu4red/lita-redmine.png?branch=master)](https://travis-ci.org/josqu4red/lita-redmine)
 [![Coverage Status](https://coveralls.io/repos/josqu4red/lita-redmine/badge.png)](https://coveralls.io/r/josqu4red/lita-redmine)
 
-**lita-gerrit** is a handler for [Lita](https://github.com/josqu4red/lita) that allows interaction with Redmine project management tool (or its fork, Chiliproject).
+**lita-redmine** is a handler for [Lita](https://github.com/josqu4red/lita) that allows interaction with Redmine project management tool (or its fork, Chiliproject).
 
 ## Installation
 
