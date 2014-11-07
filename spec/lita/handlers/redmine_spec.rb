@@ -10,8 +10,8 @@ describe Lita::Handlers::Redmine, lita_handler: true do
     end
   end
 
-  it { routes("get me redmine 12345, please").to(:issue) }
-  it { doesnt_route("redmine foo").to(:issue) }
+  it { is_expected.to route("get me redmine 12345, please").to(:issue) }
+  it { is_expected.not_to route("redmine foo").to(:issue) }
 
   describe "#issue" do
     let(:response) do

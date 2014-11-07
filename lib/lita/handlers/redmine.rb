@@ -4,28 +4,26 @@ module Lita
   module Handlers
     class Redmine < Handler
 
-      def self.default_config(config)
-        config.url = nil
-        config.type = :redmine # :chiliproject
-        config.apikey = nil
-      end
+      config :type, default: :redmine # valid values: [:chiliproject, :redmine]
+      config :url
+      config :apikey
 
       route /redmine\s+(\d+)/, :issue, help: { "redmine <issue #>" => "Displays issue url and subject" }
 
       def issue(response)
-        if Lita.config.handlers.redmine.url
-          redmine_url = Lita.config.handlers.redmine.url.chomp("/")
+        if config.url
+          redmine_url = config.url.chomp("/")
         else
           raise "Redmine URL must be defined ('config.handlers.redmine.url')"
         end
 
-        if Lita.config.handlers.redmine.apikey
-          apikey = Lita.config.handlers.redmine.apikey
+        if config.apikey
+          apikey = config.apikey
         else
           raise "Redmine API key must be defined ('config.handlers.redmine.apikey')"
         end
 
-        case Lita.config.handlers.redmine.type
+        case config.type
         when :redmine
           apikey_header = "X-Redmine-API-Key"
         when :chiliproject
